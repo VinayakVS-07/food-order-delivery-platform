@@ -1,0 +1,12 @@
+.dialog-title {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 18px;
+ 
+  align-items: center;
+}
+
+
+mat-dialog-actions {
+  margin-top: 10px;
+}

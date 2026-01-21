@@ -1,0 +1,80 @@
+<app-customer-header></app-customer-header>
+
+<div class="live-orders-container" *ngIf="!isLoading; else loading">
+  <div *ngIf="liveOrders.length === 0" class="no-orders">
+    <p>No active live orders found.</p>
+  </div>
+
+  <div *ngFor="let order of liveOrders" class="order-card">
+    <!-- Header -->
+    <div class="order-header">
+      <div class="order-info">
+        <h3> Order #{{ order.orderID }}</h3>
+        <p class="order-time">{{ order.orderTime | date:'short' }}</p>
+      </div>
+
+      <div class="order-status">
+         <label>Order Status:</label>
+  <select
+    [(ngModel)]="order.orderStatus"
+    (change)="onStatusChange(order, order.orderStatus)"
+    [ngClass]="getStatusColorClass(order.orderStatus)"
+  >
+    <option
+      *ngFor="let status of ['Accepted', 'Preparing', 'Ready']"
+      [ngClass]="getStatusColorClass(status)"
+      [value]="status"
+    >
+      {{ status }}
+    </option>
+  </select>
+</div>
+
+
+    </div>
+
+    <!-- Customer + Rider Details -->
+    <div class="details-section">
+      <!-- Customer -->
+      <div class="customer-details">
+        <div class="customer-row">
+          <span class="customer-name">Customer:  {{ order.customerName }}</span>
+          <span class="customer-phone">📞 {{ order.customerPhone }}</span>
+        </div>
+        <p class="customer-address">{{ order.customerAddress }}</p>
+      </div>
+
+      <!-- Rider -->
+      <div class="rider-details" *ngIf="order.riderName">
+        <div class="rider-row">
+          <span class="rider-name">Delivery Rider: {{ order.riderName }}</span>
+          <span class="rider-phone">📞 {{ order.riderPhone }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div class="items-list">
+      <div *ngFor="let item of order.items" class="item-row">
+        <img [src]="item.itemImage" alt="{{ item.itemName }}" class="item-image" />
+        <div class="item-details">
+          <span class="item-name">{{ item.itemName }}</span>
+          <span class="item-price">₹{{ item.unitPrice | number:'1.2-2' }}</span>
+          <span class="item-quantity">x {{ item.quantity }}</span>
+          <span class="item-total">= ₹{{ item.totalPrice | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="order-footer">
+      <p class="total-amount">
+         Total: <span class="highlight">₹{{ getTotalAmount(order) | number:'1.2-2' }}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading live orders...</div>
+</ng-template>

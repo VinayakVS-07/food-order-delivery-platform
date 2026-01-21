@@ -1,0 +1,54 @@
+<div class="ai-chat-container">
+  <div class="ai-header">
+    <span>🍽️ AI Food Assistant</span>
+    <div class="header-actions">
+      <button class="clear" (click)="clearChat()">Clear</button>
+      <button class="close" (click)="close.emit()">✖</button>
+    </div>
+  </div>
+
+  <div class="ai-messages">
+
+  <div *ngFor="let msg of messages"
+       class="chat-row"
+       [class.user-row]="msg.sender === 'user'"
+       [class.ai-row]="msg.sender === 'ai'">
+
+    <!-- AI icon -->
+    <div class="avatar ai-avatar" *ngIf="msg.sender === 'ai'">🤖</div>
+
+    <!-- Message bubble -->
+    <div class="message-bubble"
+         [class.user-bubble]="msg.sender === 'user'"
+         [class.ai-bubble]="msg.sender === 'ai'">
+      {{ msg.text }}
+    </div>
+
+    <!-- User icon -->
+    <div class="avatar user-avatar" *ngIf="msg.sender === 'user'">🧑</div>
+  </div>
+
+  <div *ngIf="isLoading" class="ai-typing">
+    AI is typing...
+  </div>
+
+  <!-- Scroll anchor -->
+  <div #chatEnd></div>
+</div>
+
+
+  <div class="ai-suggestions" *ngIf="messages.length <= 1">
+    <button *ngFor="let q of predefinedQuestions"
+            (click)="sendMessage(q)">
+      {{ q }}
+    </button>
+  </div>
+
+  <div class="ai-input">
+    <input
+      [(ngModel)]="userMessage"
+      (keydown)="handleEnter($event)"
+      placeholder="Ask about food, orders, or health..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>

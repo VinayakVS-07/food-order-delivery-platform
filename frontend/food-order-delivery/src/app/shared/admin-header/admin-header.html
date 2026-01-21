@@ -1,0 +1,62 @@
+<!-- === Admin Header with Sidebar === -->
+<div class="admin-container">
+
+  <!-- === Sidebar Navigation === -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Admin</h2>
+    <ul>
+      <li routerLink="/admin-dashboard" routerLinkActive="active" (click)="scrollToTop()">
+        <span class="material-icons">space_dashboard</span>
+        <span class="label">Dashboard</span>
+      </li>
+
+      <li routerLink="/all-orders" routerLinkActive="active" (click)="scrollToTop()">
+        <span class="material-icons">receipt_long</span>
+        <span class="label">Orders</span>
+      </li>
+
+      <li routerLink="/admin-restaurant" routerLinkActive="active" (click)="scrollToTop()">
+        <span class="material-icons">local_dining</span>
+        <span class="label">Restaurants</span>
+      </li>
+
+      <li routerLink="/admin-riders" routerLinkActive="active" (click)="scrollToTop()">
+        <span class="material-icons">delivery_dining</span>
+        <span class="label">Riders</span>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- === Top Navbar === -->
+  <nav class="navbar">
+
+    <div class="logo">🍴 Foodify</div>
+
+    <div class="nav-right">
+      <div class="notification-icon" (click)="goToOrders()">
+        <i class="material-icons">notifications</i>
+        <span class="badge" *ngIf="activeOrderCount > 0">{{ activeOrderCount }}</span>
+      </div>
+      <div class="profile-dropdown" (click)="toggleDropdown()">
+  <ng-container *ngIf="profileImageUrl; else adminDefaultIcon">
+    <div class="profile-avatar-header">
+      <img [src]="profileImageUrl" alt="Profile" />
+    </div>
+  </ng-container>
+
+  <ng-template #adminDefaultIcon>
+    <i class="material-icons">account_circle</i>
+  </ng-template>
+
+  <span>{{ fullName }}</span>
+  <i class="material-icons menu-icon">menu</i>
+
+  <ul [class.show]="dropdownOpen">
+    <li (click)="myAccount()">My Account</li>
+    <li (click)="goToOrders()">All Orders</li>
+    <li (click)="logout()">Logout</li>
+  </ul>
+</div>
+    </div>
+  </nav>
+</div>

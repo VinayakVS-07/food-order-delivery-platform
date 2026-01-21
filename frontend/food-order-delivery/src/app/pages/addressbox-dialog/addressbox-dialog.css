@@ -1,0 +1,288 @@
+/* === Dialog Header === */
+.dialog-title {
+  align-items: center;
+  gap: 10px;
+  font-weight: 550;
+  font-size: 1.1rem;
+  color: #f15829;
+  padding: 8px 0 10px;
+  border-bottom: 2px solid #e3f2fd;
+  text-transform: capitalize;
+  text-align: center;
+  margin-top: -2px;
+}
+
+/* === Dialog Body === */
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 20px 14px 0;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb transparent;
+}
+
+/* Scrollbar Style */
+.dialog-body::-webkit-scrollbar {
+  width: 6px;
+}
+.dialog-body::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 8px;
+}
+.dialog-body::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* === Section Titles === */
+.section-title {
+  font-weight: 560;
+  color: #333;
+  font-size: 1.05rem;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* === Saved Addresses === */
+.saved-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.address-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.address-card {
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  margin: 10px 18px;
+}
+
+.address-card:hover {
+  background-color: #eaf3ff;
+  border-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.2);
+}
+
+.radio-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  color: #1976d2;
+}
+
+.address-info {
+  display: flex;
+  flex-direction: column;
+  color: #333;
+}
+
+.address-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.line1 {
+  font-weight: 600;
+  color: #222;
+}
+
+.line2,
+.city {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.default {
+  font-size: 0.85rem;
+  color: #1976d2;
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+/* Empty State */
+.empty-text {
+  font-size: 0.95rem;
+  color: #777;
+  text-align: center;
+  padding: 10px 0;
+  font-style: italic;
+}
+
+/* === Add New Address Card === */
+.add-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-card {
+  padding: 28px 18px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.add-card:hover {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* === Compact Form Layout === */
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+  padding: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem; 
+  flex-wrap: wrap;
+  align-items: center;
+  width: 95%;
+}
+
+.full-width {
+  width: 95%;
+}
+
+.half-width {
+  flex: 1;
+  width: 95%; 
+}
+
+
+.address-form input,
+.address-form select,
+.address-form textarea {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 1rem; 
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+  height: 3px;
+}
+
+.address-form input:focus,
+.address-form select:focus,
+.address-form textarea:focus {
+  border-color: #007bff;
+}
+
+/* Tighten label spacing */
+.address-form label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+/* Button alignment */
+.address-form .btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.address-form button {
+  padding: 6px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+
+
+/* === Buttons === */
+.save-btn {
+  width: 85%;
+  margin-left: 35px;
+  margin-top: 0px;
+  border-radius: 8px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 10px 0;
+  background:#1976d2;
+  color: rgb(253, 251, 251);
+  box-shadow: 0 3px 12px rgba(25, 118, 210, 0.25);
+  transition: all 0.25s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient( #1565c0, #1e88e5);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(25, 118, 210, 0.35);
+}
+
+/* === Dialog Actions === */
+mat-dialog-actions {
+  padding: 16px 24px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #fafafa;
+}
+
+button[mat-flat-button],
+button[mat-stroked-button] {
+  min-width: 130px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+button[mat-flat-button] {
+  box-shadow: 0 3px 10px rgba(25, 118, 210, 0.25);
+}
+
+button[mat-stroked-button]:hover {
+  background-color: #ffefef;
+  border-color: #f44336;
+}
+
+button[mat-flat-button]:hover {
+  box-shadow: 0 3px 10px rgba(25, 118, 210, 0.25);
+  background-color: #0035bb;
+  
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  .dialog-body {
+    padding: 12px;
+  }
+
+  .add-card {
+    padding: 16px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .half-width {
+    width: 100%;
+  }
+
+  .save-btn {
+    font-size: 0.9rem;
+  }
+}

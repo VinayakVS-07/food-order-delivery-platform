@@ -1,0 +1,46 @@
+<app-customer-header></app-customer-header>
+
+
+<div class="live-orders-container" *ngIf="!isLoading && liveOrders.length > 0; else loadingOrEmpty">
+  <div 
+    class="order-card" 
+    *ngFor="let order of liveOrders" 
+    (click)="openOrderDetails(order.orderID)"
+  >
+    <div class="restaurant-section">
+      <img 
+        [src]="order.restaurantImage || 'assets/images/default-restaurant.jpg'" 
+        alt="Restaurant" 
+        class="restaurant-image"
+      />
+      <div class="restaurant-info">
+        <h2>{{ order.restaurantName }}</h2>
+        <p>{{ order.restaurantAddress }}</p>
+        <p class="phone">📞 {{ order.restaurantPhone }}</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="customer-section">
+      
+      <p><strong>Customer: {{    order.customerName }}</strong></p>
+      <p>{{ order.customerAddress }}</p>
+      <p class="phone">📞 {{ order.customerPhone }}</p>
+    </div>
+
+    <div class="order-footer">
+      <p class="order-id">Order #{{ order.orderID }}</p>
+      <p class="amount">₹{{ order.totalAmount | number:'1.2-2' }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingOrEmpty>
+  <div class="status-message">
+    <p *ngIf="isLoading">Loading live orders...</p>
+    <p *ngIf="!isLoading && errorMessage">{{ errorMessage }}</p>
+    <p *ngIf="!isLoading && !errorMessage">No active orders assigned right now.</p>
+  </div>
+</ng-template>
+

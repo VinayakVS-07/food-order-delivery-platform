@@ -1,0 +1,84 @@
+<app-admin-header></app-admin-header>
+
+<div class="orders-container">
+  <div *ngFor="let order of orders" class="order-card">
+    <div class="order-header">
+      <div>
+        <h3>Order #{{ order.orderID }} - {{ order.customerName }}</h3>
+        <p>{{ order.restaurantName }} </p>
+
+        <small>{{ order.createdAt | date:'medium' }}</small>
+      </div>
+      <div class="status-container">
+        <div
+          class="status-badge"
+          [ngStyle]="{ 'background-color': getStatusColor(order.orderStatus) }"
+          (click)="toggleDropdown(order.orderID)">
+          {{ order.orderStatus }}
+        </div>
+
+        <!-- Dropdown for status change -->
+        <div *ngIf="selectedOrderId === order.orderID" class="status-dropdown">
+          <div
+            *ngFor="let status of statusOptions"
+            class="status-option"
+            [ngStyle]="{ 'color': getStatusColor(status) }"
+            (click)="updateStatus(order.orderID, status)">
+            {{ status }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div *ngFor="let item of order.orderItems" class="order-item">
+      <img [src]="item.imageUrl" alt="{{ item.itemName }}" />
+      <div class="item-details">
+        <p>{{ item.itemName }} × {{ item.quantity }}</p>
+      </div>
+      <p class="price">₹{{ item.unitPrice * item.quantity }}</p>
+    </div>
+
+    <div class="order-footer">
+      <p><strong>Total:</strong> ₹{{ order.totalAmount }}</p>
+    
+      <p><strong>Payment:</strong> {{ order.paymentStatus }}</p>
+
+<div class="assign-rider-section">
+  <label><strong>Rider:</strong></label>
+
+  <!-- Show assigned rider name if already assigned -->
+  <span *ngIf="order.riderName" class="assigned-rider">
+    <strong>{{ order.riderName }}</strong>
+  </span>
+
+  <!-- Show rider assignment only if order is not delivered -->
+<ng-container *ngIf="order.orderStatus !== 'Delivered'; else deliveredRider">
+  <select
+    [(ngModel)]="selectedRiderId[order.orderID]"
+    class="rider-select"
+    (focus)="loadRiders()"
+  >
+    <option value="">
+      {{ order.riderName ? '-- Change Rider --' : '-- Select Rider --' }}
+    </option>
+
+    <option *ngFor="let rider of riders" [value]="rider.riderID">
+      {{ rider.riderName }}
+    </option>
+  </select>
+
+  <button class="assign-btn" (click)="assignRider(order.orderID)">
+    {{ order.riderName ? 'Update' : 'Assign' }}
+  </button>
+</ng-container>
+
+<!-- Shown when Delivered -->
+<ng-template #deliveredRider>
+  <p class="delivered-note">Rider: <strong>{{ order.riderName }}</strong> ✅ (Delivered)</p>
+</ng-template>
+
+
+    </div>
+  </div>
+</div>

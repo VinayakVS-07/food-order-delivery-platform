@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="dialog-title">Pending Restaurant Approvals</h2>
+
+<div mat-dialog-content class="dialog-content">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    <mat-progress-spinner diameter="40" mode="indeterminate" color="primary"></mat-progress-spinner>
+    <p>Loading pending users...</p>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && pendingUsers.length === 0" class="empty-state">
+<div class="empty-message">
+         <mat-icon>person_off</mat-icon>
+      <p>No pending restaurant approvals 🎉</p>
+    </div>
+  </div>
+
+  <!-- Data table -->
+  <table *ngIf="!loading && pendingUsers.length > 0" class="rider-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+     
+        <th>Phone</th>
+        <th>Registered</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of pendingUsers">
+        <td>{{ user.name }}</td>
+    
+        <td>{{ user.phone }}</td>
+        <td>{{ user.registeredDate | date: 'medium' }}</td>
+        <td>
+          <button mat-icon-button color="primary" class="approve-btn" matTooltip="Approve" 
+            (click)="approveUser(user)"
+            [disabled]="approving === user.userID">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button  (click)="closeDialog()">Close</button>
+</div>
+

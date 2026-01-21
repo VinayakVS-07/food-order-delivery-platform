@@ -1,0 +1,53 @@
+<app-customer-header></app-customer-header>
+
+<div class="order-history-container" *ngIf="!loading; else loadingTpl">
+  <div *ngIf="groupedOrders.length > 0; else noOrders">
+    <div class="order-card" *ngFor="let order of groupedOrders">
+      <div class="order-header">
+        <div>
+          <h3>Order #{{ order.orderID }}</h3>
+
+            <p><strong>{{ order.customerName }}</strong> 📞: {{ order.customerPhone }}</p>
+          <p class="address">{{ order.customerAddress }}</p>
+
+        </div>
+        <div class="customer-info">
+         
+         
+          <p class="status" [ngClass]="order.orderStatus.toLowerCase()">
+            {{ order.orderStatus | uppercase }}
+          </p>
+          <p class="time">{{ order.orderTime | date:'medium' }}</p>   
+
+        </div>
+      </div>
+
+      <div class="items-list">
+        <div class="item" *ngFor="let item of order.items">
+          <img [src]="item.itemImage" alt="item" />
+          <div class="item-details">
+            <h4>{{ item.itemName }}</h4>
+            <p>Qty: {{ item.quantity }}</p>
+            <p>₹{{ item.totalPrice }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <p><strong>Rider:</strong> {{ order.riderName }} 📞: {{ order.riderPhone }}</p>
+        <p class="amount">Total: ₹{{ order.totalAmount }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="no-orders">
+      <p>No past orders found.</p>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading order history...</div>
+</ng-template>
+

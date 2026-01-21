@@ -1,0 +1,52 @@
+<app-customer-header></app-customer-header>
+
+
+<div class="orders-container" *ngIf="!loading ">
+ 
+  <div *ngIf="orders.length === 0" class="no-orders">
+    <p>No orders yet. Start ordering your favorite meals 🍴</p>
+  </div>
+
+  <div class="order-card" *ngFor="let order of orders">
+    <div class="order-header">
+      <div>
+        <h3>{{ order.restaurantName }}</h3>
+        <p class="order-date">{{ order.orderDate | date: 'medium' }}</p>
+      </div>
+      <span class="status-badge" [ngStyle]="{'background-color': getStatusColor(order.orderStatus)}">
+        {{ order.orderStatus }}
+      </span>
+    </div>
+
+    <div class="order-body">
+      <div class="item-row" *ngFor="let item of order.orderItems">
+        <div class="item-image">
+          <img [src]="item.imageUrl || 'assets/images/no-image.png'" alt="item" />
+        </div>
+        <div class="item-details">
+          <p class="item-name">{{ item.menuItemName }} 
+           x{{ item.quantity }}</p>
+        </div>
+        <div class="item-price">
+          ₹{{ item.totalPrice }}
+        </div>
+      </div>
+
+      <div class="order-summary">
+        <p><strong>Total:</strong> ₹{{ order.totalAmount }}</p>
+        <p><strong>Payment:</strong> {{ order.paymentStatus }}</p>
+        <div class="rider" *ngIf="order.riderName">
+  <p><strong>Delivery Rider:</strong> {{ order.riderName }}</p>
+  <p><strong>📞:</strong> {{ order.riderPhone }}</p>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading-state">
+  <p>Loading your orders...</p>
+</div>
+
+

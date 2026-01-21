@@ -1,0 +1,72 @@
+<app-customer-header></app-customer-header>
+
+<div class="dashboard-container" *ngIf="!isLoading; else loading">
+  <div class="header-section">
+    <div class="left">
+      <h2>
+        Hi, {{ dashboardData?.userName }}
+              <span class="status-dot" [ngClass]="{ 'online': isOpen, 'offline': !isOpen }"></span>
+        </h2>
+    <div class="status-toggle">
+    <mat-slide-toggle
+      [checked]="isOpen"
+      [disabled]="toggling"
+      color="primary"
+      (change)="toggleRestaurantStatus($event.checked)"
+      class="status-switch"
+    >
+      <span class="status-content">
+  
+        <span class="status-text">{{ isOpen ? 'Open for Orders' : 'Closed' }}</span>
+      </span>
+    </mat-slide-toggle>
+  </div>
+
+      
+      
+    </div>
+
+    <div class="right">
+      <button class="live-orders-btn" routerLink="/restaurant-live-order">
+        🔴 Live Orders
+      </button>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="card">
+      <h3>Today's Orders</h3>
+      <p>{{ dashboardData?.todaysOrders || 0 }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p>{{ dashboardData?.totalOrders || 0 }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Earnings</h3>
+      <p>₹{{ dashboardData?.totalEarnings || 0 | number:'1.2-2' }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Today's Earnings</h3>
+      <p>₹{{ dashboardData?.todaysEarnings || 0 | number:'1.2-2' }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Weekly Earnings</h3>
+      <p>₹{{ dashboardData?.weeklyEarnings || 0 | number:'1.2-2' }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Monthly Earnings</h3>
+      <p>₹{{ dashboardData?.monthlyEarnings || 0 | number:'1.2-2' }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading dashboard...</div>
+</ng-template>
+

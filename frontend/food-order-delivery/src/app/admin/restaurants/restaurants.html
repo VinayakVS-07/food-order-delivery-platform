@@ -1,0 +1,38 @@
+<app-admin-header></app-admin-header>
+
+<div class="admin-restaurants-page">
+  <h1>All Restaurants</h1>
+
+  <!-- 🔍 Search Bar -->
+  <div class="search-section">
+    <div class="search-wrapper">
+      <input
+        [(ngModel)]="searchTerm"
+        placeholder="Search by name, city, or cuisine..."
+        (keyup.enter)="onSearch()" />
+      <span class="clear-btn" *ngIf="searchTerm" (click)="clearSearch()">✖</span>
+    </div>
+    <button (click)="onSearch()">🔍︎</button>
+  </div>
+
+    <button class="approve" mat-raised-button  (click)="approveRiders()">
+        <mat-icon>check_circle</mat-icon>
+        Pending Approvals
+      </button>
+
+  <!-- 🍽️ Restaurant Grid -->
+  <section class="restaurant-section">
+    <div class="restaurant-grid">
+      <div class="restaurant-card" *ngFor="let r of filteredRestaurants">
+        <img [src]="r.imageUrl || 'assets/default-restaurant.jpg'" alt="{{ r.name }}" />
+        <h3>{{ r.name }}</h3>
+        <p>{{ r.city }}, {{ r.state }}</p>
+        <p>⭐ {{ r.rating || '4.5' }}</p>
+        <button (click)="viewMenu(r)">View Menu</button>
+      </div>
+    </div>
+
+    <p *ngIf="filteredRestaurants.length === 0" class="no-data">No restaurants found.</p>
+  </section>
+</div>
+

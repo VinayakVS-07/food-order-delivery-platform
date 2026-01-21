@@ -1,0 +1,331 @@
+/* ===== CONTAINER ===== */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* ===== CARD ===== */
+.register-card {
+  background: #fff;
+  width: 420px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== HEADINGS ===== */
+.register-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 8px;
+  margin-top: 2px;
+}
+
+.register-card .subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ff5722;
+  margin-bottom: 30px;
+}
+
+/* ===== FORM ===== */
+
+
+/* Row for two-column inputs */
+.form-row {
+  display: flex;
+  gap: 10px;
+  width: 420px;
+  margin-bottom: 17px;
+}
+
+/* Each input container */
+.form-group {
+  text-align: left;
+  margin-bottom: 18px;
+  width: 393px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+/* ===== INPUTS ===== */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 4px rgba(255, 107, 107, 0.4);
+  background-color: #fff;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+/* ===== ERRORS ===== */
+.error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ===== BUTTON ===== */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #ff3b3b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+button[type="submit"]:disabled {
+  background: #ffb3b3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ===== OTP area ===== */
+.email-group {
+  position: relative;
+}
+
+/* OTP actions row */
+.otp-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* small informational text beside buttons */
+.otp-info {
+  font-size: 13px;
+  color: #444;
+}
+
+/* green verified badge */
+.verified-badge {
+  color: #2ecc71;
+  margin-left: 8px;
+}
+
+/* OTP row layout */
+.otp-row {
+  margin-top: 6px;
+}
+
+.otp-row-inner {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* OTP input */
+.otp-input {
+  width: 140px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  font-size: 15px;
+}
+
+/* Btn shared */
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Send OTP button */
+.btn-send-otp {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+/* Verify button */
+.btn-verify {
+  background: #2ecc71;
+  color: #fff;
+}
+
+/* Resend button */
+.btn-resend {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+/* Submit button override (keeps original look) */
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #ff3b3b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+.btn-submit:disabled {
+  background: #ffb3b3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* make send otp button slightly smaller and compact */
+.btn.small,
+.btn-send-otp.small {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* ensure verify button has consistent sizing */
+.btn-verify {
+  padding: 8px 12px;
+  min-width: 96px;
+}
+
+/* disabled verified look */
+.verified-badge {
+  color: #2ecc71;
+  margin-left: 8px;
+  font-weight: 700;
+}
+
+/* dim disabled buttons slightly for clarity */
+.btn[disabled],
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* tighten layout when send button is small */
+.otp-actions .otp-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.email-input[readonly] {
+  background-color: #f3f3f3;
+  cursor: not-allowed;
+}
+
+.email-lock {
+  position: absolute;
+  right: -15px;
+  top: 10px;
+  font-size: 16px;
+  color: #2ecc71;
+}
+
+
+/* ===== MESSAGES ===== */
+.message {
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.redirect {
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  color: #444;
+}
+
+.redirect a {
+  color: #ff6b6b;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.redirect a:hover {
+  color: #ff3b3b;
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .register-card {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .register-card h2 {
+    font-size: 24px;
+  }
+
+  .register-card .subtitle {
+    font-size: 16px;
+  }
+}

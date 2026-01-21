@@ -1,0 +1,229 @@
+/* === Admin Layout Wrapper === */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+
+
+/* === Main Dashboard Content === */
+.admin-main {
+  margin-left: 230px; /* matches sidebar width */
+  margin-top: 80px;   /* matches navbar height */
+  padding: 2rem 3rem;
+  flex: 1;
+  background: linear-gradient(180deg, #f2f4fa 0%, #e3ebf5 100%);
+  overflow-y: auto;
+  height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+
+
+/* ===== Dashboard Container ===== */
+
+.dashboard-container {
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
+  background: linear-gradient(180deg, #f2f4fa 0%, #e3ebf5 100%);
+  min-height: 100%;
+}
+
+/* ===== Heading ===== */
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+  margin-top: 0rem;
+}
+/* ===== Stats Section ===== */
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stats-row {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1 1 250px;
+  max-width: 316px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  padding: 1.2rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+
+.stat h3 {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 0.4rem;
+}
+
+.stat p {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* ===== Icons for Entity Cards ===== */
+.entity .icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Emphasize sections visually */
+.stats-row:first-child .stat {
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafc 100%);
+  border-top: 3px solid #4e73df;
+}
+
+.stats-row:nth-child(2) .stat {
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+  border-top: 3px solid #f6c23e;
+}
+
+.entity-row .entity {
+  background: linear-gradient(180deg, #ffffff 0%, #f3faf7 100%);
+  border-top: 3px solid #1cc88a;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .stat {
+    flex: 1 1 45%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .stat {
+    flex: 1 1 100%;
+  }
+}
+
+/* ===== Charts Section ===== */
+.charts-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.chart-card {
+  flex: 1 1 380px;
+  max-width: 488px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  margin-top: 20px;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+}
+
+.chart-card h4 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #34495e;
+  text-align: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 320px !important;
+}
+
+/* ===== Recent Orders ===== */
+.recent-orders {
+  
+  text-align: center;
+  margin-top: -5px;
+ 
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.recent-orders h3 {
+  font-size: 1.3rem;
+  color: #34495e;
+ margin-top: 1px;
+}
+
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.recent-orders th,
+.recent-orders td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.recent-orders th {
+  background: #f9fafc;
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.recent-orders tr:hover {
+  background: #f3f6fa;
+}
+
+/* ===== Status Colors ===== */
+span.paid { color: #1cc88a; font-weight: 600; }
+span.pending { color: #f6c23e; font-weight: 600; }
+span.completed { color: #36b9cc; font-weight: 600; }
+span.cancelled { color: #e74a3b; font-weight: 600; }
+
+/* ===== Loading ===== */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+
+
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}

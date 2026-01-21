@@ -1,0 +1,145 @@
+/* Container */
+.dashboard-container {
+  max-width: 1100px;
+  margin: 4px auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Rider Header */
+.rider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8e4e4;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+
+}
+
+/* Rider Info */
+.rider-info h2 {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #333;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+  vertical-align: middle;
+  background-color: grey;
+  transition: background-color 0.3s ease;
+}
+
+.status-dot.online {
+  background-color: #4caf50;
+}
+
+.status-dot.offline {
+  background-color: grey;
+}
+
+
+.status-toggle {
+  display: flex;
+  align-items: center;
+ 
+}
+
+
+.mat-slide-toggle {
+  margin-left: 20px;
+
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px; 
+  gap: 10px;
+}
+
+.status-text {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+
+.live-orders-btn {
+  display: inline-block;
+  padding: 25px 150px;
+  background: linear-gradient(120deg, #ff8a00, #e52e71);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 250px;
+  transition: opacity 0.3s ease;
+}
+
+.live-orders-btn:hover {
+  opacity: 0.9;
+}
+
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  background: #f8e4e4;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card h3 {
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.stat-card p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rider-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .live-orders-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

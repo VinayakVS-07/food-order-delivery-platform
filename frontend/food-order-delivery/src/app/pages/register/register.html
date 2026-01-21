@@ -1,0 +1,117 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Create Your Account</h2>
+    <p class="subtitle">Join 🍴 Foodify</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- ===== First/Last Name Row ===== -->
+      <div class="form-row">
+        <input type="text" formControlName="firstName" placeholder="First Name" />
+        <div class="error" *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid">
+          First Name is required.
+        </div>
+
+        <input type="text" formControlName="lastName" placeholder="Last Name" />
+        <div class="error" *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid">
+          Last Name is required.
+        </div>
+      </div>
+
+      <!-- ===== Email (full width) ===== -->
+      <div class="form-group email-group">
+        <input type="email" formControlName="email" placeholder="Email Address" [readonly]="emailVerified"
+          class="email-input" />
+        <span *ngIf="emailVerified" class="email-lock">🔒</span>
+        <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Enter a valid email address.</div>
+        </div>
+
+        <!-- ===== Send OTP button (right aligned) ===== -->
+        <div class="otp-actions">
+          <button type="button" (click)="sendOtp()"
+            [disabled]="sendingOtp || registerForm.get('email')?.invalid || (otpSent && !resendEnabled) || emailVerified"
+            class="btn btn-send-otp small">
+            {{ sendingOtp ? 'Sending...' : (otpSent ? (resendEnabled ? 'Resend OTP' : 'Sent') : 'Send OTP') }}
+          </button>
+
+          <div *ngIf="otpSent" class="otp-info">
+            <ng-container *ngIf="!resendEnabled">
+              Resend in {{ countdown }}s
+            </ng-container>
+            <ng-container *ngIf="resendEnabled">
+              You can resend OTP.
+            </ng-container>
+            <span *ngIf="emailVerified" class="verified-badge">• Verified</span>
+          </div>
+        </div>
+
+        <!-- ===== OTP Input + Verify Button (only show after sending) ===== -->
+        <div *ngIf="otpSent" class="form-group otp-row">
+          <div class="otp-row-inner">
+            <input type="text" placeholder="Enter OTP" formControlName="otpCode" maxlength="6" class="otp-input"
+              [disabled]="emailVerified" />
+
+            <button type="button" (click)="verifyOtp()"
+              [disabled]="verifyingOtp || !(registerForm.get('otpCode')?.value) || emailVerified"
+              class="btn btn-verify">
+              {{ verifyingOtp ? 'Verifying...' : 'Verify OTP' }}
+            </button>
+          </div>
+          <div class="error"
+            *ngIf="!emailVerified && registerForm.get('otpCode')?.value && registerForm.get('otpCode')?.value.length >= 6 && !verifyingOtp">
+            Not verified yet. Click Verify.
+          </div>
+        </div>
+      </div>
+      <!-- ===== Password/Confirm Password Row ===== -->
+      <div class="form-row password-row">
+        <input type="password" formControlName="password" placeholder="Password" />
+        <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 7 characters.</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one special
+            character.</div>
+        </div>
+
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+        <div class="error"
+          *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">.</div>
+      </div>
+
+      <!-- ===== Password Mismatch Error ===== -->
+      <div class="error" *ngIf="registerForm.errors?.['passwordMismatch'] &&
+        (registerForm.get('confirmPassword')?.touched || registerForm.get('password')?.touched)">
+        Passwords do not match.
+      </div>
+
+      <!-- ===== Phone (full width) ===== -->
+      <div class="form-group">
+        <input type="text" formControlName="phone" placeholder="Phone Number" />
+        <div class="error" *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+          Phone is required.
+        </div>
+        <div class="error" *ngIf="registerForm.get('phone')?.errors?.['pattern']">
+          Enter a valid phone number.
+        </div>
+      </div>
+
+      <!-- ===== Role Dropdown (full width) ===== -->
+      <div class="form-group-2">
+        <label for="roleSelect">Register as</label>
+        <select id="roleSelect" formControlName="roleID">
+          <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+        </select>
+      </div>
+
+      <!-- ===== Submit Button ===== -->
+      <button type="submit" [disabled]="registerForm.invalid || !emailVerified" class="btn-submit">Register</button>
+    </form>
+
+    <!-- ===== Messages ===== -->
+    <p class="message" *ngIf="message">{{ message }}</p>
+    <p class="redirect">Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</div>

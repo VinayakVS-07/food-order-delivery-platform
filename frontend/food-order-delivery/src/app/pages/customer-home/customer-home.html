@@ -1,0 +1,123 @@
+<app-customer-header></app-customer-header>
+
+<!-- ✅ Hero Section -->
+<section class="hero">
+
+<div class="hero-slideshow">
+    <img
+      *ngFor="let img of heroImages; let i = index"
+      [src]="img"
+      [class.active]="i === currentImageIndex"
+      alt="Banner Image"
+    />
+     <!-- ✅ Slide Indicators -->
+    <div class="slide-indicators">
+      <span
+        *ngFor="let img of heroImages; let i = index"
+        [class.active]="i === currentImageIndex"
+        (click)="goToSlide(i)">
+      </span>
+    </div>
+
+  </div>
+
+  <div class="hero-content">
+    <h1>Delicious food, delivered fast 🍔</h1>
+    <p>Order your favorite meals from top-rated restaurants near you.</p>
+
+    <div class="hero-search">
+  <div class="search-wrapper">
+    <input 
+      [(ngModel)]="searchTerm" 
+      placeholder="Search by restaurant,city or cuisine..." (keyup.enter)="onSearch()" />
+    <span 
+      class="clear-btn" 
+      *ngIf="searchTerm" 
+      (click)="clearSearch()">✖</span>
+  </div>
+  <button (click)="onSearch()">Search</button>
+</div>
+
+  </div>
+</section>
+
+<!-- ✅ Categories Section -->
+<section class="categories">
+  <h2 class="category-title">Explore Categories</h2>
+
+  <div class="category-list">
+    <div
+      *ngFor="let cat of categories"
+      class="category-item"
+      (click)="toggleCategory(cat.categoryName)"
+    >
+      <img
+        [src]="cat.categoryImageUrl || 'assets/images/default-category.jpg'"
+        alt="{{ cat.categoryName }}"
+        class="category-image"
+        [class.active]="selectedCategory === cat.categoryName"
+      />
+      <p class="category-name">{{ cat.categoryName }}</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ✅ Trending Menu Items Carousel -->
+<section class="menu-carousel-section">
+  <h2>Popular Menu Items</h2>
+
+  <div class="carousel-wrapper">
+    <button class="nav-btn left" (click)="moveMenu('left')">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+  <div class="menu-carousel">
+    <div class="menu-card" *ngFor="let item of menuItems"
+    (click)="openMenuItem(item)">
+      <img [src]="item.menuImage || 'assets/default-food.jpg'" alt="{{item.menuItemName}}" />
+      <h3>{{ item.menuItemName }}</h3>
+      <p class="restaurant-name">{{ item.restaurantName }}</p>
+      <p class="price">₹{{ item.price }}</p>
+    </div>
+  </div>
+
+   <button class="nav-btn right" (click)="moveMenu('right')">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+</section>
+
+
+
+<!-- ✅ Featured Restaurants -->
+<section id="featured-restaurants" class="featured-section" #restaurantSection class="restaurants">
+  <h2>Featured Restaurants</h2>
+  <div class="restaurant-grid">
+    <div class="restaurant-card" *ngFor="let r of filteredRestaurants">
+      <img [src]="r.imageUrl || 'assets/default-restaurant.jpg'" alt="{{r.name}}" />
+      <h3>{{ r.name }}</h3>
+      <p>{{ r.cuisineType }}</p>
+      <p>{{ r.city }}, {{ r.state }}</p>
+      <p>⭐ {{ r.rating || '4.5' }}</p>
+      <button class="view-menu-btn" (click)="viewMenu(r)">View Menu</button>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ✅ Footer -->
+<footer>
+  <div class="footer-links">
+    <a mat-button ="#">About</a>
+    <a mat-button ="#">Contact</a>
+    <a mat-button ="#">Privacy</a>
+    <a mat-button ="#">Help</a>
+  </div>
+
+  <p>© 2025 Foodify.</p>
+</footer>
+
+

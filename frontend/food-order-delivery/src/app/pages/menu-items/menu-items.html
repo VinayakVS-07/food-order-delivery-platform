@@ -1,0 +1,181 @@
+<ng-container *ngIf="userRole === 'Admin'; else customerHeader">
+  <app-admin-header></app-admin-header>
+
+  <!-- ✅ Admin View Layout -->
+  <div class="admin-menu-wrapper" >
+
+
+    <div class="menu-grid">
+      <div class="menu-card" *ngFor="let item of menuItems">
+        <img [src]="item.imageUrl || 'assets/default-food.jpg'" alt="{{ item.name }}" class="menu-img" />
+        <div class="menu-info">
+          <h3>{{ item.name }}</h3>
+          <p class="menu-desc">{{ item.description }}</p>
+          <p class="menu-price">₹{{ item.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- ✅ Customer Header and Layout -->
+<ng-template #customerHeader>
+  <app-customer-header></app-customer-header>
+
+  <div class="menu-container">
+        <h2 class="admin-title" *ngIf="userRole === 'Customer'">{{  restaurantName  }}</h2>
+    <div class="menu-grid">
+
+<!-- Add New Menu Item Card (for Restaurant Role only) -->
+  <div class="menu-card add-card" *ngIf="userRole === 'Restaurant'">
+    <ng-container *ngIf="!newItemMode; else addForm">
+      <div class="add-icon" (click)="toggleAddForm()">
+        <i class="fas fa-plus"></i>
+        <p>Add Item</p>
+      </div>
+    </ng-container>
+
+    <ng-template #addForm>
+      <form (ngSubmit)="saveNewMenuItem()" class="add-item-form">
+        <h4>Add Menu Item</h4>
+
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="newMenuItem.name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="newMenuItem.description" name="description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" [(ngModel)]="newMenuItem.category" name="category" />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" [(ngModel)]="newMenuItem.price" name="price" required />
+        </div>
+
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="text" [(ngModel)]="newMenuItem.imageUrl" name="imageUrl" />
+        </div>
+
+        <div class="form-group checkbox">
+          <label>
+            <input type="checkbox" [(ngModel)]="newMenuItem.isAvailable" name="isAvailable" />
+            Available
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" class="cancel-btn" (click)="toggleAddForm()">Cancel</button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+
+      <div class="menu-card" *ngFor="let item of menuItems">
+        <img [src]="item.imageUrl || 'assets/default-food.jpg'" alt="{{ item.name }}" class="menu-img" />
+        <div class="menu-info">
+          <h3>{{ item.name }}</h3>
+          <p class="menu-desc">{{ item.description }}</p>
+
+          <div class="menu-bottom">
+            <p class="menu-price" *ngIf="!editingItem || editingItem.menuItemID !== item.menuItemID">₹{{ item.price }}</p>
+
+            <div class="cart-controls transition-container">
+              <button 
+                class="add-btn" *ngIf="userRole === 'Customer'"
+                [class.show]="getItemQty(item) === 0"
+                (click)="addCart(item)">
+                Add
+              </button>
+
+              <div class="quantity-box" [class.show]="getItemQty(item) > 0">
+                <button (click)="decreaseQty(item)">−</button>
+                <span>{{ getItemQty(item) }}</span>
+                <button (click)="addCart(item)">+</button>
+              </div>
+            </div>
+
+            <div class="menu-actions">
+            <button 
+  class="add-btn1" 
+  *ngIf="userRole === 'Restaurant'"
+ 
+  (click)="editMenuItem(item.menuItemID)">
+  Edit
+</button>
+  </div>
+</div>
+
+<!-- Edit Form (visible when selected item is being edited) -->
+<div class="edit-form" *ngIf="editingItem && editingItem.menuItemID === item.menuItemID">
+  <h4>Edit Menu Item</h4>
+
+  <form (ngSubmit)="saveMenuItemChanges()">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="editingItem.name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea [(ngModel)]="editingItem.description" name="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Category:</label>
+      <input type="text" [(ngModel)]="editingItem.category" name="category" />
+    </div>
+
+    <div class="form-group">
+      <label>Price:</label>
+      <input type="number" [(ngModel)]="editingItem.price" name="price" required />
+    </div>
+
+    <div class="form-group">
+      <label>Image URL:</label>
+      <input type="text" [(ngModel)]="editingItem.imageUrl" name="imageUrl" />
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="editingItem.isAvailable" name="isAvailable" />
+        Available
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="editingItem.isActive" name="isActive" />
+        Active
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="save-btn">Save</button>
+      <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </form>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <!-- ✅ Customer Cart Bar -->
+  <div class="cart-bar" *ngIf="userRole === 'Customer'" >
+    <div class="cart-summary">
+      <span>{{ totalItems }} items | ₹{{ totalAmount }}</span>
+    </div>
+
+    <div class="cart-buttons">
+      <button class="add-cart-btn" (click)="addToCart()">Add to Cart</button>
+      <button class="view-cart-btn" (click)="viewCart()">View Cart</button>
+    </div>
+  </div>
+</ng-template>

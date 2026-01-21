@@ -1,0 +1,56 @@
+<app-customer-header></app-customer-header>
+
+<!-- ===== Content ===== -->
+<div class="order-history-container">
+  <div *ngIf="isLoading" class="loading">Loading orders...</div>
+
+  <div *ngIf="!isLoading && orders.length > 0" class="orders-container">
+    <h3 class="section-title">Your Orders</h3>
+
+    <div *ngFor="let order of orders" class="order-card">
+      <!-- Order Header -->
+      <div class="order-header">
+        <div class="order-id">#{{ order.orderID }}</div>
+        <div
+          class="order-status"
+          [ngStyle]="{ color: getStatusColor(order.orderStatus) }"
+        >
+          {{ getStatusLabel(order.orderStatus) }}
+        </div>
+      </div>
+
+      <!-- Order Details -->
+      <div class="order-body">
+        <img
+          [src]="order.restaurantImage"
+          alt="Restaurant"
+          class="restaurant-img"
+        />
+        <div class="order-info">
+          <h4>{{ order.restaurantName }}</h4>
+          <p class="restaurant-address">{{ order.restaurantAddress }}</p>
+          
+        </div>
+        
+      </div>
+      <p class="customer">
+            <strong>Delivery Location:</strong> {{ order.customerAddress }}
+          </p>
+
+      <!-- Order Footer -->
+      <div class="order-footer">
+        <p class="earning"><strong>Payment Mode:</strong> {{ order.paymentMethod }}</p>
+        <p class="earning">
+          You have earned
+          <span class="earning-amount"
+            >₹{{ order.riderEarning | number: '1.2-2' }}</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && orders.length === 0" class="no-orders">
+    No order history available.
+  </div>
+</div>

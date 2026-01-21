@@ -1,0 +1,217 @@
+/* ===== Header Bar ===== */
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  top: 0;
+  position: sticky;
+  background: #fdfdfd;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  z-index: 20;
+  max-width: 696px;
+  margin: 0 auto;
+  
+}
+
+.back-btn {
+  background: #dad9d9;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.back-btn:hover { background: #b6b5b5; }
+
+.header-content h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.header-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+/* ===== Wrapper ===== */
+.order-content-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  background: #ffffff;
+  padding-bottom: 100px;
+  margin-top: -15px;
+  margin-bottom: -100px;
+  border-radius:  12px 12px 12px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ===== Cards ===== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 18px;
+  margin: 18px auto;
+}
+
+/* ===== Section Headers ===== */
+.section-header {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.section-header span { margin-left: 6px; }
+.section-header.restaurant { color: #ff7043; }
+.section-header.customer { color: #007bff; }
+.section-header.order { color: #28a745; }
+.section-header.items { color: #ffb300; }
+
+/* ===== Restaurant Section ===== */
+.restaurant-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.restaurant-img {
+  width: 180px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* ===== Items ===== */
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.item-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ===== Sticky Swipe Section ===== */
+.swipe-container {
+  position: sticky;
+  bottom: 0;
+  max-width: 600px;
+  height: 70px;
+  margin: 0 auto 20px auto;
+  background: #bff5c6;
+  border-radius: 35px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  z-index: 30;
+ 
+  user-select: none;  
+  -webkit-user-select: none;
+  -ms-user-select: none; 
+  touch-action: pan-x;   
+}
+
+.swipe-container:active { background: #b2fdb2; }
+
+.swipe-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+ 
+  background: linear-gradient(90deg, #28a745, #7ce38b);
+  border-radius: 35px;
+  transition: width 0.25s ease;
+  z-index: 0;
+}
+
+.swipe-text {
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+  color: #495057;
+  text-align: center;
+}
+
+.swipe-icon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #28a745, #218838);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  z-index: 3;
+  transition: transform 0.25s ease, left 0.25s ease;
+}
+
+.flash-success { animation: flashGreen 0.4s ease-in-out; }
+@keyframes flashGreen {
+  0% { background-color: #28a745; }
+  50% { background-color: #34d058; }
+  100% { background-color: #f1f3f5; }
+}
+
+/* ===== Delivered Banner ===== */
+.delivered-banner {
+  position: sticky;
+  bottom: 0;
+  text-align: center;
+  background: #28a745;
+  color: white;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 17px;
+  width: 500px;
+  margin: 20px auto;
+}
+
+.tick-btn {
+  background: #1f5c21;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 8px 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+  margin-left: 20px;
+}
+
+.tick-btn:hover {
+  background: #2e7d32;
+  transform: scale(1.1);
+}
+
+/* ===== Loading ===== */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #555;
+}

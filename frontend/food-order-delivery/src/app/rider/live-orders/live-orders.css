@@ -1,0 +1,167 @@
+.live-orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.order-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+.order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: #d6d4d4;
+  border-radius: 16px;
+  padding: 10px 30px;
+}
+
+.restaurant-image {
+  width: 220px;
+  height: 130px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f0f0f0;
+  margin-left: -18px;
+}
+
+.restaurant-info h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #333;
+}
+
+.restaurant-info p {
+  margin: 2px 0;
+  margin-top: 10px;
+  color: #555;
+}
+
+.phone {
+  font-size: 1rem;
+  color: #777;
+}
+
+.divider {
+  height: 15px;
+  background: #d6d4d4;
+  margin: 0.2rem 0;
+  border-radius: 16px;
+  margin-top: 3px;
+}
+
+.customer-section {
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-top: -10px;
+}
+
+.customer-section h3 {
+  margin: 0 0 4px;
+  font-weight: 600;
+  color: #333;
+
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -15px;
+  font-weight: 600;
+  color: #222;
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+.amount {
+  color: #f83939;
+  font-size: 1.5rem;
+  margin-right: 30px;
+}
+
+.status-message {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Responsive Layout Adjustments */
+
+
+@media (max-width: 768px) {
+  .live-orders-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .order-card {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .restaurant-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 15px;
+  }
+
+  .restaurant-image {
+    width: 100%;
+    height: 180px;
+    margin: 0;
+  }
+
+  .restaurant-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .restaurant-info p {
+    font-size: 0.95rem;
+  }
+
+  .customer-section {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .order-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .amount {
+    font-size: 1.2rem;
+    margin-right: 0;
+  }
+}
+
+
+

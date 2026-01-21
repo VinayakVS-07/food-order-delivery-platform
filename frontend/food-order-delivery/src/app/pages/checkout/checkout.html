@@ -1,0 +1,112 @@
+<div class="checkout-container" *ngIf="!loading; else loadingTpl">
+  <header class="checkout-header">
+    <div>
+      <h2>Checkout</h2>
+      <p class="checkout-subtitle">Confirm your address, payment and place your order</p>
+    </div>
+  </header>
+
+  <div class="checkout-content">
+    <!-- Address -->
+    <section class="section-card address-section">
+      <div class="section-header">
+        <h3>Delivery Address</h3>
+      </div>
+
+      <div *ngIf="selectedAddress; else noAddress" class="address-body">
+        <div class="address-icon">
+          <span class="material-icons">location_on</span>
+        </div>
+        <div class="address-text">
+          <p class="address-line">
+            {{ selectedAddress.addressLine1 }}
+          </p>
+          <p class="address-city">
+            {{ selectedAddress.city }}
+          </p>
+        </div>
+        <button class="icon-btn address-edit" matTooltip="Change Address" (click)="openAddressDialog()"
+          aria-label="Change address">
+          <span class="material-icons">edit_location_alt</span>
+        </button>
+      </div>
+
+      <ng-template #noAddress>
+        <div class="no-address">
+          <p>No delivery address selected.</p>
+          <button class="btn-primary" (click)="openAddressDialog()">
+            + Select Address
+          </button>
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- Instructions -->
+    <section class="section-card instructions-section">
+      <div class="section-header">
+        <h3>Delivery Instructions</h3>
+        <span class="section-helper">Optional</span>
+      </div>
+      <textarea [(ngModel)]="instructions"
+        placeholder="Add notes for the rider (e.g., 'Landmark: near the park', 'Call on arrival')"></textarea>
+    </section>
+
+    <!-- Payment -->
+    <section class="section-card payment-section">
+      <div class="section-header">
+        <h3>Payment Method</h3>
+      </div>
+      <div class="methods">
+        <label class="method-option" *ngFor="let method of paymentMethods">
+          <input type="radio" name="payment" [(ngModel)]="selectedPayment" [value]="method.value" />
+          <span class="custom-radio"></span>
+          <span class="method-label">{{ method.label }}</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="section-card price-summary">
+      <div class="section-header">
+        <h3>Order Summary</h3>
+      </div>
+
+      <p>
+        <span>Subtotal</span>
+        <span>{{ formatPrice(subtotal) }}</span>
+      </p>
+      <p>
+        <span>Delivery</span>
+        <span>{{ formatPrice(deliveryCharge) }}</span>
+      </p>
+      <p>
+        <span>Taxes (5%)</span>
+        <span>{{ formatPrice(taxes) }}</span>
+      </p>
+      <hr />
+      <h3 class="summary-total">
+        <span>Total</span>
+        <span>{{ formatPrice(totalAmount) }}</span>
+      </h3>
+    </section>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn-primary primary-action" (click)="payNow()" [disabled]="processing">
+        {{ processing ? 'Processing...' : 'Pay Now' }}
+      </button>
+      <button class="btn-secondary" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="checkout-loading">
+    <div class="loading-spinner"></div>
+    <p>Loading your checkout...</p>
+  </div>
+</ng-template>

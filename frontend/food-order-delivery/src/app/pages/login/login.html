@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="title">🍴 Foodify</h2>
+    <h3 class="subtitle">🍕 Food Order & Delivery</h3>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="form-group">
+        <input type="email" name="email" [(ngModel)]="email" required placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password" [(ngModel)]="password" required placeholder="Enter your password" />
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="btn-login">Login</button>
+
+      <p class="register-link">
+        Don’t have an account?
+        <a routerLink="/register">Register here</a>
+      </p>
+      
+
+      <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+    </form>
+  </div>
+</div>

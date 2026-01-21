@@ -1,0 +1,92 @@
+<h2 mat-dialog-title class="dialog-title">
+  
+  Choose Your Delivery Address
+</h2>
+
+<mat-dialog-content class="dialog-body">
+
+  <!-- Saved Addresses -->
+  <section class="saved-section">
+    
+    <h3 class="section-title"><mat-icon color="primary">location_on</mat-icon>Saved Addresses</h3>
+
+    <ng-container *ngIf="addresses && addresses.length > 0; else noAddress">
+
+      <mat-radio-group [(ngModel)]="selectedAddressId" class="address-group">
+        <mat-card *ngFor="let addr of addresses" class="address-card elevation">
+          <mat-radio-button [value]="addr.addressID" class="radio-wrap">
+            <div class="address-info">
+              <p class="line1">{{ addr.addressLine1 }}</p>
+              <p class="line2" *ngIf="addr.addressLine2">{{ addr.addressLine2 }}</p>
+              <p class="city">{{ addr.city }}, {{ addr.state }} - {{ addr.pincode }}</p>
+              <p class="default" *ngIf="addr.isDefault">⭐ Default</p>
+            </div>
+          </mat-radio-button>
+        </mat-card>
+      </mat-radio-group>
+    </ng-container>
+
+    <ng-template #noAddress>
+      <p class="empty-text">No saved addresses found. Add one below 👇</p>
+    </ng-template>
+  </section>
+
+  <!-- Add New Address -->
+  <section class="add-section">
+    <mat-card class="add-card elevation">
+      <h3 class="section-title">Add New Address</h3>
+
+      <form class="address-form" autocomplete="off">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address Line 1</mat-label>
+          <input matInput [(ngModel)]="newAddress.addressLine1" name="addressLine1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address Line 2</mat-label>
+          <input matInput [(ngModel)]="newAddress.addressLine2" name="addressLine2" />
+        </mat-form-field>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>City</mat-label>
+            <input matInput [(ngModel)]="newAddress.city" name="city" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>State</mat-label>
+            <input matInput [(ngModel)]="newAddress.state" name="state" />
+          </mat-form-field>
+        </div>
+
+        <div class="row align-center">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Pincode</mat-label>
+            <input matInput [(ngModel)]="newAddress.pincode" name="pincode" />
+          </mat-form-field>
+
+          <mat-checkbox [(ngModel)]="newAddress.isDefault" name="isDefault">
+            Set as default
+          </mat-checkbox>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="save-btn"
+          type="button"
+          (click)="saveAddress()"
+        >
+          <mat-icon>add_location_alt</mat-icon>
+          Save Address
+        </button>
+      </form>
+    </mat-card>
+  </section>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="confirmSelection()">Confirm & Continue</button>
+</mat-dialog-actions>

@@ -1,0 +1,308 @@
+/* === Layout Container === */
+.admin-container {
+  display: flex;
+ height:20px;
+  overflow: hidden;
+}
+
+
+/* === Sidebar === */
+.sidebar {
+  position: fixed;
+   top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  background: #ff5722;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+ 
+}
+
+.sidebar-title {
+  font-size: 1.6rem;
+  margin-top: -30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: rgb(219, 9, 9);
+  padding: 30.5px 75px;
+}
+
+.sidebar ul {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  width: 78%;
+  padding: 14px 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background: #fff;
+  color: #ff5722;
+  border-radius: 0 30px 30px 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+li .material-icons {
+  font-size: 20px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+li:hover .material-icons {
+  transform: scale(1.1);
+}
+
+li.active {
+  font-weight: 600;
+}
+
+li.active .material-icons {
+  color: #c50a0a;
+}
+
+
+
+/* === Top Navbar === */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 230px;
+  width: calc(95% - 230px);
+  height: 90px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff5722;
+  text-align: center;
+  flex: 1;
+}
+
+/* === Profile Dropdown === */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-right: 10px;
+}
+
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-avatar-header {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.profile-dropdown .menu-icon {
+  font-size: 2.2rem;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.profile-dropdown .menu-icon:hover {
+  color: #ff5722;
+}
+
+.profile-dropdown ul {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  list-style: none;
+  padding: 10px;
+  z-index: 10;
+  width: 140px;
+  font-size: 1.05rem;
+}
+
+.profile-dropdown ul.show {
+  display: block;
+}
+
+.profile-dropdown li {
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profile-dropdown li:hover {
+  background: #ff5722;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* === Notification Icon === */
+.notification-icon {
+  position: relative;
+  cursor: pointer;
+  color: #333;
+  font-size: 1.9rem;
+  transition: color 0.2s ease;
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
+.notification-icon:hover {
+  color: #ff5722;
+}
+
+.notification-icon .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff5722;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 6px;
+  text-align: center;
+}
+
+
+/* === Responsive Design === */
+
+/* Tablets and below */
+@media (max-width: 1024px) {
+  .navbar {
+    width: 100%;
+    left: 0;
+    padding: 0 20px;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .navbar .logo {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  /* === Sidebar hidden by default on mobile === */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -230px;
+    height: 100%;
+    width: 230px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* === Navbar full width === */
+  .navbar {
+    left: 0;
+    width: 100%;
+    height: 65px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  /* === Add hamburger icon === */
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ff5722;
+    margin-right: 15px;
+  }
+
+  /* Hide sidebar title and adjust list */
+  .sidebar-title {
+    display: none;
+  }
+
+  .sidebar ul {
+    padding-top: 70px;
+  }
+
+  /* Navbar profile adjustments */
+  .nav-right {
+    gap: 20px;
+  }
+
+  .profile-dropdown span {
+    display: none; /* hide name for small screens */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .profile-dropdown .menu-icon {
+    font-size: 1.5rem;
+  }
+}

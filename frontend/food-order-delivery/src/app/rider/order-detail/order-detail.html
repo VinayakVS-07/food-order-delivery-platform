@@ -1,0 +1,93 @@
+
+
+<!-- Header Bar --> 
+<div class="header-bar">
+  <button class="back-btn" routerLink="/live-orders">←</button>
+  <div class="header-content">
+    <h2>Order #{{ order?.orderID }}</h2>
+    <p *ngIf="order">From {{ order.restaurantName }}</p>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading order details...</div>
+
+<div class="order-content-wrapper" *ngIf="!isLoading && order">
+
+  <!-- Restaurant Info -->
+  <div class="card section-card">
+    <div class="section-header restaurant">
+      🍴 <span>Restaurant Details</span>
+    </div>
+    <div class="restaurant-section">
+      <img [src]="order.restaurantImage" class="restaurant-img" alt="Restaurant" />
+      <div>
+        <h3>{{ order.restaurantName }}</h3>
+        <p>{{ order.restaurantAddress }}</p>
+        <p>📞 {{ order.restaurantPhone }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Info -->
+  <div class="card section-card">
+    <div class="section-header customer">
+      👤 <span>Customer Details</span>
+    </div>
+    <div>
+      <p><strong>{{ order.customerName }}</strong></p>
+      <p>{{ order.customerAddress }}</p>
+      <p>📞 {{ order.customerPhone }}</p>
+    </div>
+  </div>
+
+  <!-- Order Info -->
+  <div class="card section-card">
+    <div class="section-header order">
+      💰 <span>Order Summary</span>
+    </div>
+    <div class="summary-grid">
+      <p><strong>Status:</strong> {{ order.orderStatus }}</p>
+      <p><strong>Payment:</strong> {{ order.paymentMethod }} ({{ order.paymentStatus }})</p>
+      <p><strong>Total Amount:</strong> ₹{{ order.paymentAmount }}</p>
+      <p><strong>Rider Earning:</strong> ₹{{ order.riderEarning }}</p>
+      <p><strong>Instructions:</strong> {{ order.deliveryInstructions || 'None' }}</p>
+    </div>
+  </div>
+
+  <!-- Items -->
+  <div class="card section-card">
+    <div class="section-header items">
+      🍔 <span>Ordered Items</span>
+    </div>
+    <div *ngFor="let item of order.orderItems" class="item-card">
+      <img [src]="item.menuItemImage" alt="Item" />
+      <div>
+        <p>{{ item.menuItemName }}</p>
+        <small>{{ item.quantity }} × ₹{{ item.unitPrice }} = ₹{{ item.totalPrice }}</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Swipe Section -->
+<div
+  *ngIf="nextStep"
+  class="swipe-container"
+  #swipeContainer
+  (mousedown)="onSwipeStart($event)"
+  (touchstart)="onSwipeStart($event)"
+>
+  <div class="swipe-progress" #swipeProgress></div>
+  
+    <div class="swipe-icon" #swipeIcon>🚴‍♂️</div>
+  
+  <div class="swipe-text">Swipe to {{ nextStep.label }}</div>
+</div>
+
+<!-- Success Banner -->
+<div *ngIf="!nextStep" class="delivered-banner">
+  Order Delivered Successfully 
+  <button class="tick-btn" (click)="navigateToLiveOrders()">
+       ✅
+        </button>
+</div>

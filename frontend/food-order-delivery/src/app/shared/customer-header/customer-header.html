@@ -1,0 +1,111 @@
+<!-- ✅ Top Navigation Bar -->
+<nav class="navbar">
+  <div class="logo">🍴 Foodify</div>
+
+    <!-- Navigation Links Customers-->
+  <ul class="nav-links" >
+    <li>
+      <a *ngIf="userRole === 'Customer'" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } " (click)="scrollToTop()" >
+        Home
+      </a>
+    </li>
+    <li>
+      <a *ngIf="userRole === 'Customer'" href="javascript:void(0)" (click)="scrollToRestaurants()"  [class.active]="activeLink === 'restaurants'">Restaurants</a>
+    </li>
+    <li>
+      <a *ngIf="userRole === 'Customer'" routerLink="/myorder" routerLinkActive="active">
+        My Orders
+      </a>
+    </li>
+     </ul>
+
+     <!-- Navigation Link Riders -->
+
+     <ul class="nav-links-rider" *ngIf="userRole === 'Rider'">
+     <li>
+      <a  routerLink="/rider-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } " (click)="scrollToTop()" >
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item live-orders-link">
+  <a routerLink="/live-orders" routerLinkActive="active" class="live-orders-anchor">
+    Live Orders
+    <span class="order-count" *ngIf="liveOrderCount > 0">{{ liveOrderCount }}</span>
+  </a>
+</li>
+
+     <li>
+      <a routerLink="/order-history" routerLinkActive="active">
+        Order History
+      </a>
+    </li>
+  </ul>
+
+   <!-- Navigation Link Restaurant -->
+   
+  <ul class="nav-links-rider" *ngIf="userRole === 'Restaurant'">
+     <li>
+      <a  routerLink="/restaurant-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } " (click)="scrollToTop()" >
+        Dashboard
+      </a>
+  
+     <li>
+      <a routerLink="/restaurant-profile" routerLinkActive="active">
+        Restaurant Profile
+      </a>
+    </li>
+ <li>
+      <a routerLink="/restaurant-order-history" routerLinkActive="active">
+        Order History
+      </a>
+    </li>
+
+  </ul>
+
+
+  <div class="nav-right">
+    <div *ngIf="userRole === 'Customer'" class="cart" (click)="goToCart()">
+      <i class="material-icons">shopping_cart</i>
+      <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </div>
+
+    <div 
+  class="notification-icon" 
+  *ngIf="userRole === 'Restaurant'" 
+  (click)="goToRestaurantLiveOrders()" 
+  
+>
+<i class="material-icons">notifications</i>
+  <span class="badge" *ngIf="liveOrderCount > 0">{{ liveOrderCount }}</span>
+  
+</div>
+
+
+    <div class="profile-dropdown" (click)="toggleDropdown()">
+       <ng-container *ngIf="profileImageUrl; else defaultProfileIcon">
+    <div class="profile-avatar-header">
+      <img [src]="profileImageUrl" alt="Profile" />
+    </div>
+  </ng-container>
+
+  <ng-template #defaultProfileIcon>
+    <i class="material-icons">account_circle</i>
+  </ng-template>
+      <span>{{ fullName }}</span>
+      <i class="material-icons menu-icon">menu</i>
+      <ul [class.show]="dropdownOpen">
+        <li (click)="myAccount()">My Account</li>
+        <li *ngIf="userRole === 'Customer'" (click)="myOrders()">My Orders</li>
+        <li (click)="logout()">Logout</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ AI Chat -->
+
+<div *ngIf="userRole === 'Customer'" class="ai-fab" (click)="toggleAIChat()">
+  🤖
+</div>
+
+<app-ai-chat *ngIf="isAIChatOpen" (close)="toggleAIChat()"> </app-ai-chat>

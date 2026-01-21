@@ -1,0 +1,118 @@
+<app-admin-header></app-admin-header>
+
+<div class="admin-content">
+  <div class="page-header">
+    <h2>Riders Management</h2>
+    <p>Monitor, approve, and manage all registered riders in the platform.</p>
+  </div>
+    <button class="approve-btn" mat-raised-button class="approve-btn" (click)="approveRiders()">
+        <mat-icon>check_circle</mat-icon>
+        Pending Approvals
+      </button>
+
+  <div class="rider-list-container">
+    <!-- 🔍 Search + Approve Button Row -->
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Search Riders</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchTerm"
+          (keyup)="onSearchChange(searchTerm)"
+          placeholder="Search by name, email, or phone"
+        />
+        <button matSuffix mat-icon-button *ngIf="searchTerm" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+    
+    </div>
+
+    <!-- 🧾 Riders Table -->
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 rider-table">
+
+      <!-- Rider Name -->
+      <ng-container matColumnDef="riderName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rider Name</th>
+        <td mat-cell *matCellDef="let rider">{{ rider.riderName }}</td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let rider">{{ rider.email }}</td>
+      </ng-container>
+
+      <!-- Phone -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+        <td mat-cell *matCellDef="let rider">{{ rider.phone }}</td>
+      </ng-container>
+
+      <!-- Online/Offline -->
+      <ng-container matColumnDef="isOnline">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Online</th>
+        <td mat-cell *matCellDef="let rider">
+          <span [class.online]="rider.isOnline" [class.offline]="!rider.isOnline">
+            {{ rider.isOnline ? 'Online' : 'Offline' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Total Orders -->
+      <ng-container matColumnDef="totalOrders">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Orders</th>
+        <td mat-cell *matCellDef="let rider">{{ rider.totalOrders }}</td>
+      </ng-container>
+
+      <!-- Monthly Earnings -->
+      <ng-container matColumnDef="monthlyEarnings">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>This Month</th>
+        <td mat-cell *matCellDef="let rider">₹{{ rider.monthlyEarnings | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <!-- Floating Cash -->
+      <ng-container matColumnDef="floatingCash">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Floating Cash</th>
+        <td mat-cell *matCellDef="let rider">₹{{ rider.floatingCash | number: '1.2-2' }}</td>
+      </ng-container>
+
+      <!-- Active -->
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let rider">
+          <mat-icon [color]="rider.isActive ? 'primary' : 'warn'">
+            {{ rider.isActive ? 'check_circle' : 'cancel' }}
+          </mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let rider">
+          <button
+            mat-icon-button
+            matTooltip="{{ rider.isActive ? 'Deactivate Rider' : 'Activate Rider' }}"
+            (click)="toggleStatus(rider)"
+          >
+            <mat-icon [color]="rider.isActive ? 'primary' : 'warn'">
+              {{ rider.isActive ? 'toggle_on' : 'toggle_off' }}
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator class="pagination"
+      [length]="totalCount"
+      [pageSize]="filter.pageSize"
+      [pageSizeOptions]="[5, 10, 25]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</div>

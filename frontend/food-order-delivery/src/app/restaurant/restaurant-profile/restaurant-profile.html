@@ -1,0 +1,211 @@
+<app-customer-header></app-customer-header>
+
+<div class="restaurant-profile-container" *ngIf="!loading; else loadingTpl">
+
+  <!-- Restaurant Exists -->
+  <div *ngIf="restaurant; else noRestaurant">
+
+    <form [formGroup]="restaurantForm" *ngIf="editing; else viewMode" class="edit-section">
+  <div class="image-section">
+    <img 
+      [src]="restaurantForm.value.imageUrl || 'assets/images/default-restaurant.jpg'" 
+      alt="Restaurant Image" 
+      class="restaurant-preview"
+    />
+    <mat-form-field appearance="outline" class="image-input">
+      <mat-label>Image URL</mat-label>
+      <input matInput formControlName="imageUrl" (input)="onImagePreviewChange()">
+    </mat-form-field>
+  </div>
+
+  <div class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Restaurant Name</mat-label>
+      <input matInput formControlName="name" placeholder="Restaurant Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter a short description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address" placeholder="e.g., 123 King St">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city" placeholder="e.g., Mumbai">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>State</mat-label>
+      <input matInput formControlName="state" placeholder="e.g., Maharashtra">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pincode</mat-label>
+      <input matInput formControlName="pincode" placeholder="e.g., 400001">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Opening Time</mat-label>
+      <input matInput type="time" formControlName="openingTime">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Closing Time</mat-label>
+      <input matInput type="time" formControlName="closingTime">
+    </mat-form-field>
+
+    <mat-slide-toggle color="primary" formControlName="isOpen">
+      Open for Orders
+    </mat-slide-toggle>
+  </div>
+
+  <div class="form-actions">
+    <button mat-flat-button color="primary" (click)="saveChanges()">
+      <i class="fas fa-save"></i> Save Changes
+    </button>
+    <button mat-stroked-button color="warn" (click)="cancelEdit()">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+  </div>
+</form>
+
+
+    <ng-template #viewMode>
+  <div class="restaurant-card">
+
+    <!-- Banner -->
+    <div class="banner">
+      <img [src]="restaurant.imageUrl || 'assets/images/default-restaurant.jpg'" alt="Restaurant Image" />
+      <div class="banner-overlay">
+        <h2 class="restaurant-name">{{ restaurant.name }}</h2>
+        <span class="rating">
+          <i class="fas fa-star"></i> {{ restaurant.rating || 'N/A' }}
+        </span>
+              <button class="viewbutton" (click)="viewMenu(restaurant)">
+    View Menu
+  </button>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-grid">
+        <div>
+          <h4>Description</h4>
+          <p>{{ restaurant.description || '—' }}</p>
+        </div>
+
+        <div>
+          <h4>Address</h4>
+          <p>{{ restaurant.address }}, {{ restaurant.city }}, {{ restaurant.state }} - {{ restaurant.pincode }}</p>
+        </div>
+
+        <div class="timing">
+          <h4>Timing</h4>
+          <p>{{ restaurant.openingTime }} - {{ restaurant.closingTime }}</p>
+        </div>
+
+        <div>
+          <h4>Status</h4>
+          <span class="status-badge" [ngClass]="restaurant.isOpen ? 'open' : 'closed'">
+            {{ restaurant.isOpen ? 'Open for Orders' : 'Closed' }}
+          </span>
+        </div>
+
+        <div>
+          <h4>Created At</h4>
+          <p>{{ restaurant.createdAt | date:'medium' }}</p>
+        </div>
+      </div>
+      
+    </div>
+    <div class="lastone">
+<button class="edit-details" mat-flat-button color="accent" (click)="onEdit()">
+        <i class="fas fa-edit"></i> Edit Details
+      </button>
+  
+    </div>
+
+  </div>
+</ng-template>
+  </div>
+
+  <!-- No Restaurant -->
+  <ng-template #noRestaurant>
+    <div class="empty-state">
+      <h3>No Restaurant Found</h3>
+      <p>You haven’t added your restaurant yet. Let’s set it up!</p>
+
+      <form [formGroup]="restaurantForm">
+
+ <div class="image-section">
+        <img
+          [src]="restaurantForm.value.imageUrl || 'assets/images/default-restaurant.jpg'"
+          alt="Restaurant Image"
+          class="restaurant-preview"
+        />
+        <mat-form-field appearance="outline" class="image-input">
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="imageUrl" (input)="onImagePreviewChange()">
+        </mat-form-field>
+      </div>
+
+        <div class="form-grid">
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Restaurant Name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="state">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pincode</mat-label>
+            <input matInput formControlName="pincode">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Opening Time</mat-label>
+            <input matInput type="time" formControlName="openingTime">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Closing Time</mat-label>
+            <input matInput type="time" formControlName="closingTime">
+          </mat-form-field>
+        </div>
+
+        <button mat-flat-button color="primary" (click)="addRestaurant()">Add Restaurant</button>
+      </form>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading restaurant info...</div>
+</ng-template>
+

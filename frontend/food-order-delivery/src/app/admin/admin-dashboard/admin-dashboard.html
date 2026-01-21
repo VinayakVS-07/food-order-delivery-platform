@@ -1,0 +1,76 @@
+<!-- Admin Layout -->
+<div class="admin-layout">
+  <!-- Sidebar + Topbar -->
+  <app-admin-header></app-admin-header>
+
+  <!-- Main Dashboard Content -->
+  <main class="admin-main">
+    <div class="dashboard-container" *ngIf="!isLoading; else loading">
+      
+
+      <!-- ===== Stats Section ===== -->
+      <div class="stats-section">
+        <div class="stats-row">
+          <div class="card stat">
+            <h3>Total Orders</h3>
+            <p>{{ stats.totalOrders || 0 }}</p>
+          </div>
+          <div class="card stat">
+            <h3>Total Profit</h3>
+            <p>₹{{ stats.totalProfit || 0 | number }}</p>
+          </div>
+          <div class="card stat">
+            <h3>Total Earnings</h3>
+            <p>₹{{ stats.totalEarnings || 0 | number }}</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="card stat">
+            <h3>Today's Orders</h3>
+            <p>{{ stats.todaysOrders || 0 }}</p>
+          </div>
+          <div class="card stat">
+            <h3>Today's Profit</h3>
+            <p>₹{{ stats.todaysProfit || 0 | number }}</p>
+          </div>
+          <div class="card stat">
+            <h3>Today's Earnings</h3>
+            <p>₹{{ stats.todaysEarnings || 0 | number }}</p>
+          </div>
+        </div>
+      </div>
+
+     
+
+      <!-- ===== Recent Orders ===== -->
+      <div class="recent-orders">
+        <h3>Recent Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Restaurant</th>
+              <th>Total (₹)</th>
+              <th>Payment Status</th>
+              <th>Order Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of recentOrders">
+              <td>{{ order.customerName }}</td>
+              <td>{{ order.restaurantName }}</td>
+              <td>{{ order.totalAmount | number }}</td>
+              <td><span [ngClass]="order.paymentStatus.toLowerCase()">{{ order.paymentStatus }}</span></td>
+              <td><span [ngClass]="order.orderStatus.toLowerCase()">{{ order.orderStatus }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="loading">Loading dashboard...</div>
+    </ng-template>
+  </main>
+</div>

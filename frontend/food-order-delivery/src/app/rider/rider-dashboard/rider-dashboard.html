@@ -1,0 +1,66 @@
+<app-customer-header></app-customer-header>
+
+<div class="dashboard-container">
+
+  <!-- Top Bar -->
+  <div class="rider-header">
+    <div class="rider-info">
+      <h2>
+    Hi, {{ fullName }}
+    <span class="status-dot" [ngClass]="{ 'online': isOnline, 'offline': !isOnline }"></span>
+  </h2>
+        <div class="status-row">
+     
+      <mat-slide-toggle
+        [checked]="isOnline"
+        color="primary"
+        (change)="toggleOnlineStatus()"
+      > <p class="status-text">{{ isOnline ? 'Online' : 'Offline' }}</p>
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <!-- Live Orders Button -->
+ <button class="live-orders-btn" (click)="goToLiveOrders()">
+  🔴 Live Orders
+</button>
+
+
+  </div>
+
+  
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <h3>Today's Orders</h3>
+      <p>{{ dashboard.todayOrders || 0 }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Orders</h3>
+      <p>{{ dashboard.totalOrders || 0 }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Floating Cash</h3>
+      <p>₹{{ dashboard.floatingCash || 0 | number: '1.2-2' }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Today's Earnings</h3>
+      <p>₹{{ dashboard.todayEarnings || 0 | number: '1.2-2' }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Weekly Earnings</h3>
+      <p>₹{{ dashboard.weeklyEarnings || 0 | number: '1.2-2' }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Monthly Earnings</h3>
+      <p>₹{{ dashboard.monthlyEarnings || 0 | number: '1.2-2' }}</p>
+    </div>
+
+  </div>
+</div>
